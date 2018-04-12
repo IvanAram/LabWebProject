@@ -14,7 +14,7 @@ CREATE TABLE Menus(
 
 CREATE TABLE Categories(
   c_id int PRIMARY KEY AUTO_INCREMENT,
-  label varchar(100) not null
+  label varchar(100) not null UNIQUE
 );
 
 CREATE TABLE Dishes(
@@ -56,4 +56,4 @@ CREATE TABLE MenuBeverage(
 --
 
 
-INSERT INTO Categories (label) VALUES ("Beverages");
+INSERT INTO Categories (label) VALUES ("Beverages", "Other");
