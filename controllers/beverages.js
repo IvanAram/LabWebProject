@@ -1,8 +1,8 @@
 var db = require('../db.js');
-var Category = require('../models/Category');
+var Beverage = require('../models/Beverage');
 
 exports.getAll = function(req, res) {
-  db.get().query('SELECT * FROM Categories', function(err, rows) {
+  db.get().query('SELECT * FROM Beverages', function(err, rows) {
     var response = {};
     var data = [];
     if (err) {
@@ -10,12 +10,12 @@ exports.getAll = function(req, res) {
       response.message = err.sqlMessage || err;
     } else {
       for (var i = 0; i < rows.length; i++) {
-        var category = new Category(rows[i].c_id, rows[i].label);
+        var category = new Beverage(rows[i].b_id, rows[i].name, rows[i].description, rows[i].alcoholic);
         data.push(category);
       }
       response.status = 0;
       response.message = 'Success';
-      response.data = data;
+      response.data = data;  
     }
     res.send(response);
   });
