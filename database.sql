@@ -1,4 +1,6 @@
 DROP DATABASE IF EXISTS LabWebProject;
+CREATE DATABASE LabWebProject;
+USE LabWebProject;
 
 CREATE TABLE Employees(
   e_id int PRIMARY KEY AUTO_INCREMENT,
@@ -56,4 +58,4 @@ CREATE TABLE MenuBeverage(
 --
 
 
-INSERT INTO Categories (label) VALUES ("Beverages", "Other");
+INSERT INTO Categories (label) VALUES ("Beverages"), ("Other");
