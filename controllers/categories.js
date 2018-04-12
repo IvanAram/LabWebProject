@@ -7,7 +7,7 @@ exports.getAll = function(req, res) {
     var data = [];
     if (err) {
       response.status = 4;
-      response.message = err;
+      response.message = err.sqlMessage || err;
     } else {
       if (rows) {
         for (var i = 0; i < rows.length; i++) {
