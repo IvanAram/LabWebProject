@@ -5,4 +5,4 @@ var Dish = function(_id, _name, _desc, _cid){
   this.cid = _cid;
 }
 
-medule.exports = Dish;
+module.exports = Dish;

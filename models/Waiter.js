@@ -3,4 +3,4 @@ var Waiter = function(_id, _name){
   this.name = _name;
 }
 
-medule.exports = Waiter;
+module.exports = Waiter;

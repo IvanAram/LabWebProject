@@ -1,9 +1,9 @@
-var Menu = function(_id, _label, _desc, _dishes, _beverages){
+var Menu = function(_id, _label, _desc){
   this.id = _id;
   this.label = _label;
   this.description = _desc;
-  this.dishes = _dishes;
-  this.beverages = _beverages;
+  this.dishes = [];
+  this.beverages = [];
 }
 
-medule.exports = Menu;
+module.exports = Menu;

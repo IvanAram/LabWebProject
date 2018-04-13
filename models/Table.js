@@ -3,4 +3,4 @@ var Table = function(_id, _seats){
   this.seats = _seats;
 }
 
-medule.exports = Table;
+module.exports = Table;

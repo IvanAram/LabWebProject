@@ -15,8 +15,60 @@ exports.getAll = function(req, res) {
       }
       response.status = 0;
       response.message = 'Success';
-      response.data = data;  
+      response.data = data;
     }
     res.send(response);
+  });
+}
+
+exports.getOne = function(req, res) {
+  db.get().query('SELECT * FROM Beverages WHERE b_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Beverage(rows[0].b_id, rows[0].name, rows[0].description, rows[0].alcoholic);
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
+exports.create = function(req, res){
+  // PREGUNTAR SI NECESITAMOS VALIDACIONES
+  db.get().query('INSERT INTO Beverages (name, description, alcoholic) VALUES ("'+ req.body.name + '","' + req.body.description + '","' + req.body.alcoholic + '")', function(err, rows) {
+    var response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}
+
+exports.delete = function(req, res) {
+  db.get().query('DELETE FROM MenuBeverages WHERE b_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+      res.send(response);
+    } else {
+      db.get().query('DELETE FROM Beverages WHERE b_id = ' + req.params.id, function(err, rows) {
+        if(err){
+          response.status = 4;
+          response.message = err.sqlMessage || err;
+        } else{
+          response.status = 0;
+          response.message = "Success";
+        }
+        res.send(response);
+      });
+    }
   });
 }
