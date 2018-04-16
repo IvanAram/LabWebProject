@@ -1,13 +1,14 @@
-var mysql = require('mysql')
-var pool = {}
+var mysql = require('mysql');
+var pool = {};
+const secret = require('./config/secret.json');
 
 exports.connect = function(done){
 	pool = mysql.createPool({
-		host: 'localhost',
-		user: 'root',
-		password: 'Iv4n.Y34h',
-		port:'3306',
-		database:'LabWebProject'
+		host: secret.database.host,
+		user: secret.database.user,
+		password: secret.database.password,
+		port: secret.database.port,
+		database: secret.database.database
 	});
 	done();
 }

@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./db.js');
+const secret = require('./config/secret.json');
 
 var beveragesRouter = require('./routes/beverages');
 var categoriesRouter = require('./routes/categories');
@@ -56,3 +57,29 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// SEND MAIL FUNCTION
+// let nodemailer = require('nodemailer');
+// function sendEmail (res) {
+	// let transporter = nodemailer.createTransport({
+	//   service: 'gmail',
+	//   auth: {
+	//     user: 'secret.email.user',
+	//     pass: 'secret.email.password'
+	//   }
+	// });
+//
+//   let mailOptions = {
+//   from: 'youremail@gmail.com',
+//   to: 'myfriend@yahoo.com',
+//   subject: 'Sending Email using Node.js',
+//   html: '<h1>Welcome</h1><p>That was easy!</p>'
+// }
+//
+//   transporter.sendMail(mailOptions, (err, info) => {
+//     if (err) throw new Error(err)
+//
+//     res.statusCode = 200
+//     res.end('Email sent!')
+//   })
+// }

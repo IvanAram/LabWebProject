@@ -12,7 +12,6 @@ exports.getAll = function(req, res) {
       response.message = err.sqlMessage || err;
       res.send(response);
     } else {
-
       function queryRecursive(dishes, current, fun){
         if(dishes){
           db.get().query('SELECT d.d_id, d.name, d.description, d.c_id FROM MenuDish md, Dishes d WHERE md.m_id=' + data[current].id + ' AND d.d_id = md.d_id', function(err, rows) {
@@ -24,7 +23,7 @@ exports.getAll = function(req, res) {
               for (var i = 0; i < rows.length; i++) {
                 data[current].dishes.push(new Dish(rows[i].d_id, rows[i].name, rows[i].description, rows[i].c_id));
               }
-              return queryRecursive(false, current, fun);
+              queryRecursive(false, current, fun);
             }
           });
         } else{
@@ -37,8 +36,10 @@ exports.getAll = function(req, res) {
               for (var i = 0; i < rows.length; i++) {
                 data[current].beverages.push(new Beverage(rows[i].b_id, rows[i].name, rows[i].description, rows[i].alcoholic));
               }
-              if(current == data.length - 1) return fun();
-              else return queryRecursive(true, current + 1, fun);
+              if(current == data.length - 1) {
+                fun();
+              }
+              else queryRecursive(true, current + 1, fun);
             }
           });
         }
