@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./db.js');
-const secret = require('./config/secret.json');
+const secret = require('./config/secret.json').email;
 
 var beveragesRouter = require('./routes/beverages');
 var categoriesRouter = require('./routes/categories');
@@ -64,8 +64,8 @@ module.exports = app;
 	// let transporter = nodemailer.createTransport({
 	//   service: 'gmail',
 	//   auth: {
-	//     user: 'secret.email.user',
-	//     pass: 'secret.email.password'
+	//     user: 'secret.user',
+	//     pass: 'secret.password'
 	//   }
 	// });
 //
