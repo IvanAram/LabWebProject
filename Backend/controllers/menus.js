@@ -49,15 +49,12 @@ exports.getAll = function(req, res) {
         var menu = new Menu(rows[i].m_id, rows[i].label, rows[i].description);
         data.push(menu);
       }
-      for (var i = 0; i < data.length; i++) {
-        queryRecursive(true, 0, function(){
-          response.status = 0;
-          response.message = 'Success';
-          response.data = data;
-          res.send(response);
-        });
-      }
+      queryRecursive(true, 0, function(){
+        response.status = 0;
+        response.message = 'Success';
+        response.data = data;
+        res.send(response);
+      });
     }
-
   });
 }
