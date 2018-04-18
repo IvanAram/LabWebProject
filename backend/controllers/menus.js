@@ -3,7 +3,7 @@ var Menu = require('../models/Menu');
 var Dish = require('../models/Dish');
 var Beverage = require('../models/Beverage');
 
-exports.getAll = function(req, res) {
+exports.get = function(req, res) {
   db.get().query('SELECT * FROM Menus', function(err, rows) {
     var response = {};
     var data = [];
@@ -55,6 +55,45 @@ exports.getAll = function(req, res) {
         response.data = data;
         res.send(response);
       });
+    }
+  });
+}
+
+exports.update = function(req, res) {
+  db.get().query("", function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = 'Success';
+    }
+  });
+}
+
+exports.create = function(req, res) {
+  db.get().query("", function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = 'Success';
+    }
+  });
+}
+
+exports.delete = function(req, res) {
+  db.get().query("", function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = 'Success';
     }
   });
 }

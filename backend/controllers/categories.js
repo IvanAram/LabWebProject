@@ -1,7 +1,7 @@
 var db = require('../db.js');
 var Category = require('../models/Category');
 
-exports.getAll = function(req, res) {
+exports.get = function(req, res) {
   db.get().query('SELECT * FROM Categories', function(err, rows) {
     var response = {};
     var data = [];
@@ -22,7 +22,7 @@ exports.getAll = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query('UPDATE Categories SET label = "' + req.body.label + '"', function(err, rows) {
+  db.get().query('UPDATE Categories SET label = "' + req.body.label + '" WHERE c_id=' + req.body.id, function(err, rows) {
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
@@ -31,7 +31,7 @@ exports.update = function(req, res) {
       response.message = "Success";
     }
     res.send(response);
-  });
+  });t
 }
 
 exports.create = function(req, res) {
