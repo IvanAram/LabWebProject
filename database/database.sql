@@ -54,6 +54,7 @@ CREATE TABLE MenuBeverage(
   FOREIGN KEY(b_id) REFERENCES Beverages(b_id)
 );
 
--- Add Tables_Employees table
+-- ADD WAITERS - EMPLOYEES TABLE
 
 INSERT INTO Categories (label) VALUES ("Beverages"), ("Other");
+-- Beverages = 1, Other = 2

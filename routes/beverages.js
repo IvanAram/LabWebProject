@@ -3,7 +3,7 @@ var router = express.Router();
 var beveragesController = require('../controllers/beverages');
 
 router.get('/', beveragesController.getAll);
-router.get('/:id', beveragesController.getOne);
+router.get('/:id', beveragesController.getOne); // NO SE SI ESTA SE VA A USAR
 
 router.post('/', beveragesController.create);
 

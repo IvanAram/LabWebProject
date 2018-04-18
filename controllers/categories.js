@@ -20,3 +20,42 @@ exports.getAll = function(req, res) {
     res.send(response);
   });
 }
+
+exports.update = function(req, res) {
+  db.get().query('UPDATE Categories SET label = "' + req.body.label + '"', function(err, rows) {
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}
+
+exports.create = function(req, res) {
+  db.get().query('INSERT INTO Categories (label) VALUES ("' + req.body.label + '")', function(err, rows) {
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}
+
+exports.delete = function(req, res) {
+  db.get().query('DELETE FROM Categories WHERE c_id = ' + req.body.id, function(err, rows) {
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}

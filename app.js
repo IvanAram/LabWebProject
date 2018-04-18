@@ -60,21 +60,24 @@ module.exports = app;
 
 // SEND MAIL FUNCTION
 // let nodemailer = require('nodemailer');
-// function sendEmail (res) {
+// function sendEmail (res, url) {
 	// let transporter = nodemailer.createTransport({
 	//   service: 'gmail',
 	//   auth: {
-	//     user: 'secret.user',
-	//     pass: 'secret.password'
+	//     user: secret.user,
+	//     pass: secret.password
 	//   }
 	// });
 //
-//   let mailOptions = {
-//   from: 'youremail@gmail.com',
-//   to: 'myfriend@yahoo.com',
-//   subject: 'Sending Email using Node.js',
-//   html: '<h1>Welcome</h1><p>That was easy!</p>'
-// }
+  // let mailOptions = {
+	//   from: 'noreply@exists.not',
+	//   to: '',
+	//   subject: 'You added a new menu!',
+	//   html: '<h1>Hello Admin!</h1>' +
+	// 	'<p>You just added a menu to de menu list brah!</p>' +
+	// 	'<p>That was amazing...</p>' +
+	// 	'<p>Here\'s a link to your new menu:' + url + '</p>'
+	// }
 //
 //   transporter.sendMail(mailOptions, (err, info) => {
 //     if (err) throw new Error(err)

@@ -52,7 +52,7 @@ exports.create = function(req, res){
 }
 
 exports.delete = function(req, res) {
-  db.get().query('DELETE FROM MenuBeverages WHERE b_id = ' + req.params.id, function(err, rows) {
+  db.get().query('DELETE FROM MenuBeverages WHERE b_id = ' + req.body.id, function(err, rows) {
     var response = {};
     if (err) {
       response.status = 4;
