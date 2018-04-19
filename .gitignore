@@ -53,12 +53,11 @@ pids
 
 # Yarn Integrity file
 */.yarn-integrity
-yarn-debug.log*
-yarn-error.log*
 
 # dotenv environment variables file
 */.env
 
-*/config/*
-
+# folder created by webpack
 frontend/dist/*
+
+*/config/*
