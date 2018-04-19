@@ -4,10 +4,10 @@ var categoriesController = require('../controllers/categories');
 
 router.get('/', categoriesController.get);
 
-router.put('/', categoriesController.update);
+router.put('/:id', categoriesController.update);
 
 router.post('/', categoriesController.create);
 
-router.delete('/', categoriesController.delete);
+router.delete('/:id', categoriesController.delete);
 
 module.exports = router;

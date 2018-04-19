@@ -4,10 +4,10 @@ var dishesController = require('../controllers/dishes');
 
 router.get('/', dishesController.get);
 
-router.put('/', dishesController.update);
+router.put('/:id', dishesController.update);
 
 router.post('/', dishesController.create);
 
-router.delete('/', dishesController.delete);
+router.delete('/:id', dishesController.delete);
 
 module.exports = router;

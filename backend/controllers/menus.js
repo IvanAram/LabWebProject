@@ -71,7 +71,7 @@ exports.update = function(req, res) {
     query += "description='" + req.body.description + "' ";
   }
   if(query != ""){
-    db.get().query("UPDATE Menus SET " + query + "WHERE m_id=" + req.body.id, function(err, rows) {
+    db.get().query("UPDATE Menus SET " + query + "WHERE m_id=" + req.params.id, function(err, rows) {
       let response = {};
       if(err){
         response.status = 4;
@@ -80,6 +80,7 @@ exports.update = function(req, res) {
         response.status = 0;
         response.message = 'Success';
       }
+      res.send(response);
     });
   }
 }
@@ -94,18 +95,36 @@ exports.create = function(req, res) {
       response.status = 0;
       response.message = 'Success';
     }
+    res.send(response);
   });
 }
 
 exports.delete = function(req, res) {
-  db.get().query("DELETE FROM Menus WHERE m_id = " + req.body.id, function(err, rows) {
+  db.get().query('DELETE FROM MenuBeverages WHERE m_id = ' + req.params.id, function(err, rows) {
     let response = {};
-    if(err){
+    if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
-    } else{
-      response.status = 0;
-      response.message = 'Success';
+      res.send(response);
+    } else {
+      db.get().query('DELETE FROM MenuDishes WHERE m_id = ' + req.params.id, function(err, rows) {
+        if (err) {
+          response.status = 4;
+          response.message = err.sqlMessage || err;
+          res.send(response);
+        } else {
+          db.get().query("DELETE FROM Menus WHERE m_id = " + req.params.id, function(err, rows) {
+            if(err){
+              response.status = 4;
+              response.message = err.sqlMessage || err;
+            } else{
+              response.status = 0;
+              response.message = 'Success';
+            }
+            res.send(response);
+          });
+        }
+      });
     }
   });
 }

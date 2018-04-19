@@ -5,10 +5,10 @@ var beveragesController = require('../controllers/beverages');
 router.get('/', beveragesController.get);
 // router.get('/:id', beveragesController.getById);
 
-router.put('/', beveragesController.update);
+router.put('/:id', beveragesController.update);
 
 router.post('/', beveragesController.create);
 
-router.delete('/', beveragesController.delete);
+router.delete('/:id', beveragesController.delete);
 
 module.exports = router;

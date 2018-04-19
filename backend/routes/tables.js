@@ -4,10 +4,10 @@ var tablesController = require('../controllers/tables');
 
 router.get('/', tablesController.get);
 
-router.put('/', tablesController.update);
+router.put('/:id', tablesController.update);
 
 router.post('/', tablesController.create);
 
-router.delete('/', tablesController.delete);
+router.delete('/:id', tablesController.delete);
 
 module.exports = router;

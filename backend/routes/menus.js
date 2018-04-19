@@ -4,10 +4,10 @@ var menusController = require('../controllers/menus');
 
 router.get('/', menusController.get);
 
-router.put('/', menusController.update);
+router.put('/:id', menusController.update);
 
 router.post('/', menusController.create);
 
-router.delete('/', menusController.delete);
+router.delete('/:id', menusController.delete);
 
 module.exports = router;

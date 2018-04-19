@@ -39,7 +39,7 @@ exports.update = function(req, res) {
     query += "d_id=" + req.body.d_id + " ";
   }
   if(query != ""){
-    db.get().query("UPDATE Dishes SET " + query + "WHERE d_id=" + req.body.id, function(err, rows) {
+    db.get().query("UPDATE Dishes SET " + query + "WHERE d_id=" + req.params.id, function(err, rows) {
       if (err) {
         response.status = 4;
         response.message = err.sqlMessage || err;
@@ -67,15 +67,23 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-  db.get().query("DELETE FROM Dishes WHERE d_id = " + req.body.id, function(err, rows) {
+  db.get().query('DELETE FROM MenuDishes WHERE d_id = ' + req.params.id, function(err, rows) {
     let response = {};
-    if(err){
+    if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
-    } else{
-      response.status = 0;
-      response.message = 'Success';
+      res.send(response);
+    } else {
+      db.get().query("DELETE FROM Dishes WHERE d_id = " + req.params.id, function(err, rows) {
+        if(err){
+          response.status = 4;
+          response.message = err.sqlMessage || err;
+        } else{
+          response.status = 0;
+          response.message = 'Success';
+        }
+        res.send(response);
+      });
     }
-    res.send(response);
   });
 }
