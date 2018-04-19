@@ -22,7 +22,7 @@ exports.get = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query("UPDATE Tables SET seats = " + req.body.seats + " WHERE t_id = " + req.body.id, function(err, rows) {
+  db.get().query("UPDATE Tables SET seats = " + req.body.seats + " WHERE t_id = " + req.params.id, function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
@@ -31,6 +31,7 @@ exports.update = function(req, res) {
       response.status = 0;
       response.message = 'Success';
     }
+    res.send(response);
   });
 }
 
@@ -44,11 +45,12 @@ exports.create = function(req, res) {
       response.status = 0;
       response.message = 'Success';
     }
+    res.send(response);
   });
 }
 
 exports.delete = function(req, res) {
-  db.get().query("DELETE FROM Tables WHERE t_id = " + req.body.id, function(err, rows) {
+  db.get().query("DELETE FROM Tables WHERE t_id = " + req.params.id, function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
@@ -57,5 +59,6 @@ exports.delete = function(req, res) {
       response.status = 0;
       response.message = 'Success';
     }
+    res.send(response);
   });
 }

@@ -54,7 +54,7 @@ exports.update = function(req, res) {
     query += "alcoholic=" + req.body.alcoholic + " ";
   }
   if(query != ""){
-    db.get().query("UPDATE Beverages SET " + query + "WHERE b_id=" + req.body.id, function(err, rows) {
+    db.get().query("UPDATE Beverages SET " + query + "WHERE b_id=" + req.params.id, function(err, rows) {
       if (err) {
         response.status = 4;
         response.message = err.sqlMessage || err;
@@ -83,8 +83,8 @@ exports.create = function(req, res){
 }
 
 exports.delete = function(req, res) {
-  db.get().query('DELETE FROM MenuBeverages WHERE b_id = ' + req.body.id, function(err, rows) {
-    var response = {};
+  db.get().query('DELETE FROM MenuBeverages WHERE b_id = ' + req.params.id, function(err, rows) {
+    let response = {};
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;

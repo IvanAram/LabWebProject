@@ -22,7 +22,7 @@ exports.get = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query('UPDATE Categories SET label = "' + req.body.label + '" WHERE c_id=' + req.body.id, function(err, rows) {
+  db.get().query('UPDATE Categories SET label = "' + req.body.label + '" WHERE c_id=' + req.params.id, function(err, rows) {
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
@@ -48,14 +48,66 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-  db.get().query('DELETE FROM Categories WHERE c_id = ' + req.body.id, function(err, rows) {
+  db.get().query('SELECT d_id FROM Dishes WHERE c_id = ' + req.params.id, function(err, rows) {
+    let response = {};
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
-    } else{
-      response.status = 0;
-      response.message = "Success";
+      res.send(response);
+    } else {
+      if(rows.length){
+        let dishes = [];
+        for (var i = 0; i < rows.length; i++) {
+          dishes.push(rows[i].d_id);
+        }
+        function queryRecursive(current, fun){
+          db.get().query('DELETE FROM MenuDish WHERE d_id=' + data[current], function(err, rows) {
+            if (err) {
+              response.status = 4;
+              response.message = err.sqlMessage || err;
+              res.send(response);
+            } else{
+              if(current == dishes.length - 1){
+                fun();
+              } else{
+                queryRecursive(current + 1, fun);
+              }
+            }
+          });
+        }
+        queryRecursive(0, function() {
+          db.get().query("DELETE FROM Dishes WHERE c_id = " + req.params.id, function(err, rows) {
+            if(err){
+              response.status = 4;
+              response.message = err.sqlMessage || err;
+              res.send(response);
+            } else{
+              db.get().query('DELETE FROM Categories WHERE c_id = ' + req.params.id, function(err, rows) {
+                if (err) {
+                  response.status = 4;
+                  response.message = err.sqlMessage || err;
+                } else{
+                  response.status = 0;
+                  response.message = "Success";
+                }
+                res.send(response);
+              });
+            }
+          });
+        });
+        
+      } else{
+        db.get().query('DELETE FROM Categories WHERE c_id = ' + req.params.id, function(err, rows) {
+          if (err) {
+            response.status = 4;
+            response.message = err.sqlMessage || err;
+          } else{
+            response.status = 0;
+            response.message = "Success";
+          }
+          res.send(response);
+        });
+      }
     }
-    res.send(response);
   });
 }
