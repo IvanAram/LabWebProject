@@ -22,7 +22,7 @@ exports.get = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query("", function(err, rows) {
+  db.get().query("UPDATE Waiters SET name = '" + req.body.name + "' WHERE w_id = " + req.body.id, function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
@@ -35,7 +35,7 @@ exports.update = function(req, res) {
 }
 
 exports.create = function(req, res) {
-  db.get().query("", function(err, rows) {
+  db.get().query("INSERT INTO Waiters (name) VALUES ('" + req.body.name + "')", function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
@@ -48,7 +48,7 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-  db.get().query("", function(err, rows) {
+  db.get().query("DELETE FROM Waiters WHERE w_id = " + req.body.id, function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;

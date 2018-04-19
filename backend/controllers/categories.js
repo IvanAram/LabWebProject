@@ -31,7 +31,7 @@ exports.update = function(req, res) {
       response.message = "Success";
     }
     res.send(response);
-  });t
+  });
 }
 
 exports.create = function(req, res) {

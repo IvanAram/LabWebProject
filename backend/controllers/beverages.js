@@ -51,7 +51,7 @@ exports.update = function(req, res) {
     if(query != ""){
       query += "AND ";
     }
-    query += "alcoholic=" + req.body.alcoholic + "' ";
+    query += "alcoholic=" + req.body.alcoholic + " ";
   }
   if(query != ""){
     db.get().query("UPDATE Beverages SET " + query + "WHERE b_id=" + req.body.id, function(err, rows) {

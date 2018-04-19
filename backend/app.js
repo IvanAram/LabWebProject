@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 var db = require('./db.js');
 const secret = require('./config/secret.json').email;
 
@@ -29,6 +30,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Session configuration (handled by express-session module)
+app.use(session({
+	genid: function(req) {
+		return 1; // CHANGE - MUST BE UNIQUE FOR EACH SESSION (GENERATOR)
+	},
+	cookie:{
+		secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP)
+		maxAge: 24 * 60 * 60 * 1000 // 1 day
+	},
+	resave: false,
+	saveUninitialized: false,
+	secret: "lab web project secret"
+}));
 
 app.use('/beverages', beveragesRouter);
 app.use('/categories', categoriesRouter);

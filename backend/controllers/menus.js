@@ -60,20 +60,32 @@ exports.get = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query("", function(err, rows) {
-    let response = {};
-    if(err){
-      response.status = 4;
-      response.message = err.sqlMessage || err;
-    } else{
-      response.status = 0;
-      response.message = 'Success';
+  let query = "";
+  if(req.body.label){
+    query += "name='" + req.body.label + "' ";
+  }
+  if(req.body.description){
+    if(query != ""){
+      query += "AND ";
     }
-  });
+    query += "description='" + req.body.description + "' ";
+  }
+  if(query != ""){
+    db.get().query("UPDATE Menus SET " + query + "WHERE m_id=" + req.body.id, function(err, rows) {
+      let response = {};
+      if(err){
+        response.status = 4;
+        response.message = err.sqlMessage || err;
+      } else{
+        response.status = 0;
+        response.message = 'Success';
+      }
+    });
+  }
 }
 
 exports.create = function(req, res) {
-  db.get().query("", function(err, rows) {
+  db.get().query("INSERT INTO Menus (label, description) VALUES ('" + req.body.label + "','" + req.body.description + "')", function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
@@ -86,7 +98,7 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-  db.get().query("", function(err, rows) {
+  db.get().query("DELETE FROM Menus WHERE m_id = " + req.body.id, function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
