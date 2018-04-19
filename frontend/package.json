@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --config webpack.config.js --progress --profile --watch"
+    "build": "webpack --config webpack.config.js --progress --profile --watch",
+    "test": "npm build & npm start"
   },
   "dependencies": {
     "css-loader": "^0.28.10",

@@ -33,15 +33,12 @@ app.use(cookieParser());
 
 // Session configuration (handled by express-session module)
 app.use(session({
-	genid: function(req) {
-		return 1; // CHANGE - MUST BE UNIQUE FOR EACH SESSION (GENERATOR)
-	},
 	cookie:{
 		secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP)
 		maxAge: 24 * 60 * 60 * 1000 // 1 day
 	},
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: false, // DUNNO IF THIS IS GOOD
 	secret: "lab web project secret"
 }));
 
