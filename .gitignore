@@ -58,6 +58,6 @@ pids
 */.env
 
 # folder created by webpack
-frontend/dist/*
+frontend/dist/bundle.js
 
 */config/*
