@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var db = require('./db.js');
-const secret = require('./config/secret.json').email;
 
 var loginRouter = require('./routes/login');
 var beveragesRouter = require('./routes/beverages');
@@ -35,7 +34,7 @@ app.use(cookieParser());
 // Session configuration (handled by express-session module)
 app.use(session({
 	cookie:{
-		secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP)
+		secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP) // NORMALLY WHEN IN PRODUCTION
 		maxAge: 24 * 60 * 60 * 1000 // 1 day
 	},
 	resave: false,
@@ -71,32 +70,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-// SEND MAIL FUNCTION
-// let nodemailer = require('nodemailer');
-// function sendEmail (res, url) {
-	// let transporter = nodemailer.createTransport({
-	//   service: 'gmail',
-	//   auth: {
-	//     user: secret.user,
-	//     pass: secret.password
-	//   }
-	// });
-//
-  // let mailOptions = {
-	//   from: 'noreply@exists.not',
-	//   to: '',
-	//   subject: 'You added a new menu!',
-	//   html: '<h1>Hello Admin!</h1>' +
-	// 	'<p>You just added a menu to de menu list brah!</p>' +
-	// 	'<p>That was amazing...</p>' +
-	// 	'<p>Here\'s a link to your new menu:' + url + '</p>'
-	// }
-//
-//   transporter.sendMail(mailOptions, (err, info) => {
-//     if (err) throw new Error(err)
-//
-//     res.statusCode = 200
-//     res.end('Email sent!')
-//   })
-// }

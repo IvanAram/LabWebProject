@@ -3,8 +3,9 @@ CREATE DATABASE LabWebProject;
 USE LabWebProject;
 
 CREATE TABLE Login(
-  l_id INT PRIMARY KEY AUTO_INCREMENT,
+  u_id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(50) NOT NULL
 );
 
@@ -65,4 +66,4 @@ CREATE TABLE MenuBeverage(
 INSERT INTO Categories (label) VALUES ("Beverages"), ("Other");
 -- Beverages = 1, Other = 2
 
-INSERT INTO Login (username, password) VALUES ("admin","admin");
+INSERT INTO Login (username, email, password) VALUES ("admin","ivan.ags.95@gmail.com","admin");

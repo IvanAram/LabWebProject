@@ -1,7 +1,9 @@
 var db = require('../db.js');
+let nodemailer = require('nodemailer');
 var Menu = require('../models/Menu');
 var Dish = require('../models/Dish');
 var Beverage = require('../models/Beverage');
+const secret = require('../config/secret.json').email;
 
 exports.get = function(req, res) {
   db.get().query('SELECT * FROM Menus', function(err, rows) {
@@ -91,11 +93,34 @@ exports.create = function(req, res) {
     if(err){
       response.status = 4;
       response.message = err.sqlMessage || err;
+      res.send(response);
     } else{
-      response.status = 0;
-      response.message = 'Success';
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: secret.user,
+          pass: secret.password
+        }
+      });
+      let mailOptions = {
+        from: 'noreply@exists.not',
+        to: res.session.email,
+        subject: 'You added a new menu!',
+        html: '<h1>Hello Admin!</h1>' +
+        '<p>You just added a menu to the menu list brah!</p>' +
+        '<p>That was amazing...</p>'
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          response.status = 1;
+          response.message = "Created menu but email was not send";
+        } else{
+          response.status = 0;
+          response.message = 'Success';
+        }
+        res.send(response);
+      });
     }
-    res.send(response);
   });
 }
 
