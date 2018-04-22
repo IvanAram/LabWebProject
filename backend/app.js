@@ -7,6 +7,7 @@ var session = require('express-session');
 var db = require('./db.js');
 const secret = require('./config/secret.json').email;
 
+var loginRouter = require('./routes/login');
 var beveragesRouter = require('./routes/beverages');
 var categoriesRouter = require('./routes/categories');
 var dishesRouter = require('./routes/dishes');
@@ -42,6 +43,7 @@ app.use(session({
 	secret: "lab web project secret"
 }));
 
+app.use('/login', loginRouter);
 app.use('/beverages', beveragesRouter);
 app.use('/categories', categoriesRouter);
 app.use('/dishes', dishesRouter);

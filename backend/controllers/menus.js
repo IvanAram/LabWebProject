@@ -99,15 +99,43 @@ exports.create = function(req, res) {
   });
 }
 
+exports.addBeverage = function(req, res) {
+  db.get().query("INSERT INTO MenuBeverage (m_id, b_id) VALUES (" + req.body.m_id + "," + req.body.b_id + ")", function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
+exports.addDish = function(req, res) {
+  db.get().query("INSERT INTO MenuDish (m_id, d_id) VALUES (" + req.body.m_id + "," + req.body.d_id + ")", function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
 exports.delete = function(req, res) {
-  db.get().query('DELETE FROM MenuBeverages WHERE m_id = ' + req.params.id, function(err, rows) {
+  db.get().query('DELETE FROM MenuBeverage WHERE m_id = ' + req.params.id, function(err, rows) {
     let response = {};
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
       res.send(response);
     } else {
-      db.get().query('DELETE FROM MenuDishes WHERE m_id = ' + req.params.id, function(err, rows) {
+      db.get().query('DELETE FROM MenuDish WHERE m_id = ' + req.params.id, function(err, rows) {
         if (err) {
           response.status = 4;
           response.message = err.sqlMessage || err;
