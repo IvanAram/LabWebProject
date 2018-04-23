@@ -9,13 +9,17 @@
     "test": "npm build & npm start"
   },
   "dependencies": {
+    "acorn-dynamic-import": "^3.0.0",
     "css-loader": "^0.28.10",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.0.6",
     "node-sass": "^4.8.3",
     "path": "^0.12.7",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-burger-menu": "^2.4.2",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
