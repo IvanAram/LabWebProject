@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.js --progress --profile --watch",
-    "test": "npm build & npm start"
+    "test": "npm run build & npm start"
   },
   "dependencies": {
     "acorn-dynamic-import": "^3.0.0",
