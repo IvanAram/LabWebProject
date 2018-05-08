@@ -5,14 +5,13 @@ export default class BeverageList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      error: null,
-      isLoaded: false,
       items: []
     };
   }
 
 
   componentDidMount() {
+    document.getElementById("nav-title").innerHTML = "Bebidas";
     fetch('http://localhost:3000/beverages', { method: 'get' })
       .then(res => res.json())
       .then(res => {

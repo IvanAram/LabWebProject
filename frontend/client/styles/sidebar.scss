@@ -1,3 +1,12 @@
+.navbar-default{
+  height: 8rem;
+  p{
+    padding-top: 2rem;
+    padding-left: 0.8rem;
+    font-size: 1.8em;
+  }
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -51,5 +60,5 @@
 
 .bm-container{
   margin-left: 10rem;
-  margin-top: 2rem;
+  margin-top: 9rem;
 }
