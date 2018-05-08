@@ -4,12 +4,17 @@ const path = require('path');
 module.exports = {
   entry: "./client/index.js",
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     chunkFilename: '[id].chunk.js'
   },
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './dist',
+    hot: false
+  },
   module: {
     rules: [
       {

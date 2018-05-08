@@ -21,7 +21,7 @@ export default class Sidebar extends React.Component {
   }
 
   render () {
-    const Menu = BurgerMenu['elastic'];
+    const Menu = BurgerMenu['fallDown'];
     //const items = this.get('')
     return (
       <Menu pageWrapId={'page-wrap'} outerContainerId={'outer-container'}>

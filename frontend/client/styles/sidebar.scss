@@ -6,7 +6,6 @@
   left: 36px;
   top: 36px;
 }
-
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #373a47;
@@ -48,4 +47,9 @@
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.bm-container{
+  margin-left: 10rem;
+  margin-top: 2rem;
 }

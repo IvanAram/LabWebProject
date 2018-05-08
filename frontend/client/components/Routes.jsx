@@ -1,18 +1,22 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Router, BrowserRouter } from 'react-router-dom'
 
 import Login from './Login.jsx';
 import Index from './dashboard/Index.jsx';
 
-// SE PUEDE CAMBIAR A UN const NAMAS QUE NO SE COMO SE HACE EL export DE ESE
+import BeverageList from './dashboard/beverages/BeverageList.jsx';
+import BeverageShow from './dashboard/beverages/BeverageShow.jsx';
 
-export default class Routes extends React.Component {
-  render() {
-    return (
-      <Switch>
+const Routes = (props) => {
+  return (
+    <BrowserRouter>
+      <div className="bm-container">
         <Route exact path="/" component={Login} />
         <Route path="/dashboard" component={Index} />
-      </Switch>
-    );
-  }
-}
+        <Route exact path="/beverages" component={BeverageList} />
+        <Route path="/beverages/:id" component={BeverageShow} />
+      </div>
+    </BrowserRouter>
+  );
+};
+export default Routes;
