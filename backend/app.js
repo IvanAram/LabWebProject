@@ -34,7 +34,7 @@ app.use(cookieParser());
 // Session configuration (handled by express-session module)
 app.use(session({
 	cookie:{
-		secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP) // NORMALLY WHEN IN PRODUCTION
+		//secure: false, // CHANGE THIS TO TRUE IF HOST SERVER IN HTTPS (NOT HTTP) // NORMALLY WHEN IN PRODUCTION
 		maxAge: 24 * 60 * 60 * 1000 // 1 day
 	},
 	resave: false,

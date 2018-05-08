@@ -2,10 +2,11 @@ let db = require('../db.js');
 
 exports.login = function(req, res) {
   let query;
+  console.log(req.session);
   if(req.body.username.indexOf("@") > 0){
-    query = "SELECT * FROM Login WHERE username='" + req.body.username + "' AND password='" + req.body.password + "'";
-  } else{
     query = "SELECT * FROM Login WHERE email='" + req.body.username + "' AND password='" + req.body.password + "'";
+  } else{
+    query = "SELECT * FROM Login WHERE username='" + req.body.username + "' AND password='" + req.body.password + "'";
   }
   db.get().query(query, function(err, rows) {
     let response = {};
@@ -14,9 +15,9 @@ exports.login = function(req, res) {
       response.message = err.sqlMessage || err.toString();
     } else{
       if(rows.length == 1){
-        res.session.username = rows[0].username;
-        res.session.email = rows[0].email;
-        res.session.u_id = rows[0].u_id;
+        req.session.username = rows[0].username;
+        req.session.email = rows[0].email;
+        req.session.u_id = rows[0].u_id;
         response.status = 0;
         response.message = "Success";
       } else{
@@ -29,5 +30,5 @@ exports.login = function(req, res) {
 }
 
 exports.logout = function(req, res) {
-  res.session.destroy();
+  req.session.destroy();
 }

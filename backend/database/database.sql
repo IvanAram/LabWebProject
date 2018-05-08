@@ -67,3 +67,4 @@ INSERT INTO Categories (label) VALUES ("Beverages"), ("Other");
 -- Beverages = 1, Other = 2
 
 INSERT INTO Login (username, email, password) VALUES ("admin","ivan.ags.95@gmail.com","admin");
+INSERT INTO Login (username, email, password) VALUES ("peps","peps@peps.com","peps");
