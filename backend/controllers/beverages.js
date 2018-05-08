@@ -55,6 +55,7 @@ exports.update = function(req, res) {
   }
   if(query != ""){
     db.get().query("UPDATE Beverages SET " + query + "WHERE b_id=" + req.params.id, function(err, rows) {
+      var response = {};
       if (err) {
         response.status = 4;
         response.message = err.sqlMessage || err;

@@ -69,6 +69,11 @@ export default class BeverageList extends React.Component {
             </button>
           </td>
           <td>
+            <button type="button" className="btn btn-primary">
+              <Link to={{ pathname:`/edit-beverage/${i.id}`, query:{beverage:i} }}>Editar</Link>
+            </button>
+          </td>
+          <td>
             <button type="button" className="btn btn-primary" onClick={this.deleteRecord.bind(this, i.id)}>
               Borrar
             </button>
@@ -84,6 +89,7 @@ export default class BeverageList extends React.Component {
             <th scope="col">Nombre</th>
             <th scope="col">Descripción</th>
             <th scope="col">Alcohólica</th>
+            <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
