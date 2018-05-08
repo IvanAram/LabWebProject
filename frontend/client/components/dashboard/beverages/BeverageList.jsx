@@ -9,7 +9,6 @@ export default class BeverageList extends React.Component {
     };
   }
 
-
   componentDidMount() {
     document.getElementById("nav-title").innerHTML = "Bebidas";
     fetch('http://localhost:3000/beverages', { method: 'get' })
@@ -18,10 +17,34 @@ export default class BeverageList extends React.Component {
         if(res.status == 0) {
           this.setState({ items: res.data });
         } else {
-          console.log(res)
+          console.log(res);
         }
       })
       .catch(e => console.log(e));
+  }
+
+  deleteRecord(id, e) {
+    e.preventDefault();
+    fetch(`http://localhost:3000/beverages/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.status == 1) {
+        throw 'Error happend will requesting';
+      } else {
+        console.log(res);
+        let items = this.state.items.filter(item => item.id !== id);
+        this.setState({
+          items: items
+        });
+      }
+    })
+    .catch(error => console.log(error));
   }
 
   renderItems(){
@@ -40,7 +63,16 @@ export default class BeverageList extends React.Component {
           <td>{i.name}</td>
           <td>{i.description}</td>
           <td>{icon}</td>
-          <td><Link to={{ pathname:`/beverages/${i.id}`, query:{beverage:i} }}>Show</Link></td>
+          <td>
+            <button type="button" className="btn btn-primary">
+              <Link to={{ pathname:`/beverages/${i.id}`, query:{beverage:i} }}>Ver detalles</Link>
+            </button>
+          </td>
+          <td>
+            <button type="button" className="btn btn-primary" onClick={this.deleteRecord.bind(this, i.id)}>
+              Borrar
+            </button>
+          </td>
         </tr>
     );
     });
@@ -50,8 +82,9 @@ export default class BeverageList extends React.Component {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
+            <th scope="col">Descripción</th>
             <th scope="col">Alcohólica</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -65,7 +98,7 @@ export default class BeverageList extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center">Bebidas</h1>
+        <Link to="/new-beverage">Crear nueva bebida</Link>
         {this.renderItems()}
       </div>
     );

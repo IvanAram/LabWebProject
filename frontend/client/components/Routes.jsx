@@ -6,6 +6,7 @@ import Index from './dashboard/Index.jsx';
 
 import BeverageList from './dashboard/beverages/BeverageList.jsx';
 import BeverageShow from './dashboard/beverages/BeverageShow.jsx';
+import BeverageCreate from './dashboard/beverages/BeverageCreate.jsx';
 
 const Routes = (props) => {
   return (
@@ -16,6 +17,7 @@ const Routes = (props) => {
           <Route exact path="/" component={Login} />
           <Route path="/dashboard" component={Index} />
           <Route exact path="/beverages" component={BeverageList} />
+          <Route exact path="/new-beverage" component={BeverageCreate} />
           <Route path="/beverages/:id" component={BeverageShow} />
         </div>
       </div>

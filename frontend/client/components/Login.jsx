@@ -19,10 +19,6 @@ export default class Login extends React.Component {
       console.log("Ingresa un usuario y contraseña valido");
       return;
     }
-    this.setState({
-      username: username,
-      password: password
-    });
     let params = {
       username: username,
       password: password
@@ -41,6 +37,10 @@ export default class Login extends React.Component {
         throw 'User not found';
       } else {
         localStorage.setItem('session', true);
+        this.setState({
+          username: username,
+          password: password
+        });
         this.props.history.push("/dashboard");
       }
     })
