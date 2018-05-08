@@ -21,6 +21,21 @@ exports.get = function(req, res) {
   });
 }
 
+exports.getById = function(req, res) {
+  db.get().query('SELECT * FROM Waiters WHERE w_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Waiter(rows[0].w_id, rows[0].name);
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
 exports.update = function(req, res) {
   db.get().query("UPDATE Waiters SET name = '" + req.body.name + "' WHERE w_id = " + req.params.id, function(err, rows) {
     let response = {};

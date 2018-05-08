@@ -21,6 +21,21 @@ exports.get = function(req, res) {
   });
 }
 
+exports.getById = function(req, res) {
+  db.get().query('SELECT * FROM Tables WHERE t_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Table(rows[0].t_id, rows[0].seats);
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
 exports.update = function(req, res) {
   db.get().query("UPDATE Tables SET seats = " + req.body.seats + " WHERE t_id = " + req.params.id, function(err, rows) {
     let response = {};

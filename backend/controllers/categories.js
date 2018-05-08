@@ -21,6 +21,21 @@ exports.get = function(req, res) {
   });
 }
 
+exports.getById = function(req, res) {
+  db.get().query('SELECT * FROM Categories WHERE c_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Category(rows[0].c_id, rows[0].label);
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
 exports.update = function(req, res) {
   db.get().query('UPDATE Categories SET label = "' + req.body.label + '" WHERE c_id=' + req.params.id, function(err, rows) {
     if (err) {
@@ -95,7 +110,7 @@ exports.delete = function(req, res) {
             }
           });
         });
-        
+
       } else{
         db.get().query('DELETE FROM Categories WHERE c_id = ' + req.params.id, function(err, rows) {
           if (err) {

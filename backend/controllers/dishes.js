@@ -21,35 +21,33 @@ exports.get = function(req, res) {
   });
 }
 
+exports.getById = function(req, res) {
+  db.get().query('SELECT * FROM Dishes WHERE d_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Dish(rows[0].d_id, rows[0].name, rows[0].description, rows[0].c_id);
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
 exports.update = function(req, res) {
-  let query = "";
-  if(req.body.name){
-    query += "name='" + req.body.name + "' ";
-  }
-  if(req.body.description){
-    if(query != ""){
-      query += "AND ";
+  db.get().query("UPDATE Dishes SET name='" + req.body.name + "', description='" + req.body.description + "', d_id="+req.body.d_id + " WHERE d_id=" + req.params.id, function(err, rows) {
+    let response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
     }
-    query += "description='" + req.body.description + "' ";
-  }
-  if(req.body.d_id){
-    if(query != ""){
-      query += "AND ";
-    }
-    query += "d_id=" + req.body.d_id + " ";
-  }
-  if(query != ""){
-    db.get().query("UPDATE Dishes SET " + query + "WHERE d_id=" + req.params.id, function(err, rows) {
-      if (err) {
-        response.status = 4;
-        response.message = err.sqlMessage || err;
-      } else{
-        response.status = 0;
-        response.message = "Success";
-      }
-      res.send(response);
-    });
-  }
+    res.send(response);
+  });
 }
 
 exports.create = function(req, res) {

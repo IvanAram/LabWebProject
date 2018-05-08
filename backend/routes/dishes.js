@@ -3,6 +3,7 @@ var router = express.Router();
 var dishesController = require('../controllers/dishes');
 
 router.get('/', dishesController.get);
+router.get('/:id', dishesController.getById);
 
 router.put('/:id', dishesController.update);
 

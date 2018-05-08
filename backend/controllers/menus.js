@@ -61,6 +61,61 @@ exports.get = function(req, res) {
   });
 }
 
+exports.getById = function(req, res) {
+  db.get().query('SELECT * FROM Menus WHERE m_id = ' + req.params.id, function(err, rows) {
+    var response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else {
+      response.data = new Menu(rows[0].m_id, rows[0].label, rows[0].description);
+      db.get().query('SELECT d.d_id, d.name, d.description, d.c_id FROM MenuDish md, Dishes d WHERE md.m_id=' + response.data.id + ' AND d.d_id = md.d_id', function(err, rows) {
+        if (err) {
+          response.status = 4;
+          response.message = err.sqlMessage || err;
+          res.send(response);
+        } else{
+          for (var i = 0; i < rows.length; i++) {
+            response.data.dishes.push(new Dish(rows[i].d_id, rows[i].name, rows[i].description, rows[i].c_id));
+          }
+          db.get().query('SELECT b.b_id, b.name, b.description, b.alcoholic FROM MenuBeverage mb, Beverages b WHERE mb.m_id=' + response.data.id + ' AND b.b_id = mb.b_id', function(err, rows) {
+            if (err) {
+              response.status = 4;
+              response.message = err.sqlMessage || err;
+              res.send(response);
+            } else{
+              for (var i = 0; i < rows.length; i++) {
+                response.data.beverages.push(new Beverage(rows[i].b_id, rows[i].name, rows[i].description, rows[i].alcoholic));
+              }
+              response.status = 0;
+              response.message = "Success";
+              res.send(response);
+            }
+          });
+        }
+      });
+
+      response.status = 0;
+      response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
+exports.update = function(req, res) {
+  db.get().query("UPDATE Menus SET label='" + req.body.label + "', description='" + req.body.description + "' WHERE m_id=" + req.params.id, function(err, rows) {
+    let response = {};
+    if (err) {
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}
+
 exports.update = function(req, res) {
   let query = "";
   if(req.body.label){
@@ -147,6 +202,34 @@ exports.addDish = function(req, res) {
     } else{
       response.status = 0;
       response.message = 'Success';
+    }
+    res.send(response);
+  });
+}
+
+exports.deleteBeverage = function(req, res) {
+  db.get().query("DELETE FROM MenuBeverage WHERE m_id=" + req.body.m_id + " AND b_id=" + req.body.b_id, function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
+    }
+    res.send(response);
+  });
+}
+
+exports.deleteDish = function(req, res){
+  db.get().query("DELETE FROM MenuDish WHERE m_id=" + req.body.m_id + " AND d_id=" + req.body.d_id, function(err, rows) {
+    let response = {};
+    if(err){
+      response.status = 4;
+      response.message = err.sqlMessage || err;
+    } else{
+      response.status = 0;
+      response.message = "Success";
     }
     res.send(response);
   });

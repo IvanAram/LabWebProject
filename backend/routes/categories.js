@@ -3,6 +3,7 @@ var router = express.Router();
 var categoriesController = require('../controllers/categories');
 
 router.get('/', categoriesController.get);
+router.get('/:id', categoriesController.getById);
 
 router.put('/:id', categoriesController.update);
 
