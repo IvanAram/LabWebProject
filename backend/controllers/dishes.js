@@ -37,7 +37,7 @@ exports.getById = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  db.get().query("UPDATE Dishes SET name='" + req.body.name + "', description='" + req.body.description + "', d_id="+req.body.d_id + " WHERE d_id=" + req.params.id, function(err, rows) {
+  db.get().query("UPDATE Dishes SET name='" + req.body.name + "', description='" + req.body.description + "', c_id="+req.body.c_id + " WHERE d_id=" + req.params.id, function(err, rows) {
     let response = {};
     if (err) {
       response.status = 4;
@@ -51,7 +51,7 @@ exports.update = function(req, res) {
 }
 
 exports.create = function(req, res) {
-  db.get().query("INSERT INTO Dishes (name, description, d_id) VALUES ('" + req.body.name + "','" + req.body.description + "'," + req.body.d_id + ")", function(err, rows) {
+  db.get().query("INSERT INTO Dishes (name, description, c_id) VALUES ('" + req.body.name + "','" + req.body.description + "'," + req.body.c_id + ")", function(err, rows) {
     let response = {};
     if(err){
       response.status = 4;
