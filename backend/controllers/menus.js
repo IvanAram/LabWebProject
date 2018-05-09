@@ -159,7 +159,7 @@ exports.create = function(req, res) {
       });
       let mailOptions = {
         from: 'noreply@exists.not',
-        to: res.session.email,
+        to: req.session.email,
         subject: 'You added a new menu!',
         html: '<h1>Hello Admin!</h1>' +
         '<p>You just added a menu to the menu list brah!</p>' +
