@@ -38,6 +38,7 @@ exports.getById = function(req, res) {
 
 exports.update = function(req, res) {
   db.get().query('UPDATE Categories SET label = "' + req.body.label + '" WHERE c_id=' + req.params.id, function(err, rows) {
+    let response = {};
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;
@@ -51,6 +52,7 @@ exports.update = function(req, res) {
 
 exports.create = function(req, res) {
   db.get().query('INSERT INTO Categories (label) VALUES ("' + req.body.label + '")', function(err, rows) {
+    let response = {};
     if (err) {
       response.status = 4;
       response.message = err.sqlMessage || err;

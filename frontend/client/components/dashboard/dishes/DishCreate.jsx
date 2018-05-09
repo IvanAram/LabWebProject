@@ -2,33 +2,36 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 
-export default class BeverageUpdate extends React.Component {
+export default class DishCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      categories: [],
       name_error: "Introducir un nombre",
       show_name: false,
-      desc_error: "Introudcir una descripcion del proyecto",
-      show_desc: false,
-      beverage: this.props.location.query.beverage
+      desc_error: "Introudcir una descripcion del platillo",
+      show_desc: false
     };
   }
-
   componentDidMount(){
-    document.getElementById("nav-title").innerHTML = "Bebidas";
-    let name = document.getElementById("name"),
-        description = document.getElementById("desc"),
-        alcoholic = document.getElementById("alc");
-    name.value = this.state.beverage.name;
-    description.value = this.state.beverage.description;
-    alcoholic.checked = this.state.beverage.alcoholic ? 'checked' : '';
+    document.getElementById("nav-title").innerHTML = "Platillos";
+    fetch('http://localhost:3000/categories', { method: 'get' })
+      .then(res => res.json())
+      .then(res => {
+        if(res.status == 0) {
+          this.setState({categories: res.data});
+        } else {
+          console.log(res);
+        }
+      })
+      .catch(e => console.log(e));
   }
 
-  update(e) {
+  create(e) {
     e.preventDefault();
     let name = document.getElementById("name").value.trim(),
         description = document.getElementById("desc").value.trim(),
-        alcoholic = document.getElementById("alc").checked,
+        category = document.getElementById("category").value,
         errors = false;
     if (name == '') {
       errors = true;
@@ -43,19 +46,17 @@ export default class BeverageUpdate extends React.Component {
       });
     }
     if (errors) return;
-    alcoholic ? alcoholic = 1 : alcoholic = 0;
-    this.saveResults(name, description, alcoholic);
+    this.saveResults(name, description, category);
   }
 
-  saveResults(name, description, alcoholic){
+  saveResults(name, description, category){
     let params = {
-          name: name,
-          description: description,
-          alcoholic: alcoholic
-        },
-        id = this.state.beverage.id;
-    fetch(`http://localhost:3000/beverages/${id}`, {
-      method: 'PUT',
+      name: name,
+      description: description,
+      c_id: category
+    };
+    fetch('http://localhost:3000/dishes', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
@@ -64,11 +65,13 @@ export default class BeverageUpdate extends React.Component {
     })
     .then(res => res.json())
     .then(res => {
-      if (res.status == 1) {
+      if (res.status == 4) {
+        console.log(res);
+
         throw 'Error happend will requesting';
       } else {
         console.log(res);
-        this.props.history.push("/beverages");
+        this.props.history.push("/dishes");
       }
     })
     .catch(error => console.log(error));
@@ -80,9 +83,15 @@ export default class BeverageUpdate extends React.Component {
     );
   }
 
+  categories() {
+    return(
+      this.state.categories.map(c => <option key={`cat-${c.id}`} value={c.id}>{c.label}</option>)
+    );
+  }
+
   form(){
     return(
-      <form name="editBev" className="forms">
+      <form name="newDish" className="forms">
         <div className="form-group">
           <label>Nombre</label>
           <input type="text" id="name" className="form-control"/>
@@ -94,10 +103,12 @@ export default class BeverageUpdate extends React.Component {
           {this.state.show_desc ? this.showError(this.state.desc_error) : ''}
         </div>
         <div className="form-group">
-          <input className="form-check-input" type="checkbox" id="alc"/>
-          <label htmlFor="alc"> ¿Es alcohólica?</label>
+          <label>Categoria:</label>
+          <select className="form-control" id="category">
+            {this.categories()}
+          </select>
         </div>
-        <button type="button" className="btn btn-primary center-block" onClick={this.update.bind(this)}>Actualizar</button>
+        <button type="button" className="btn btn-primary center-block" onClick={this.create.bind(this)}>Crear</button>
       </form>
     );
   }
@@ -107,7 +118,7 @@ export default class BeverageUpdate extends React.Component {
       <div className="container">
         <button type="button" className="btn btn-primary back-button">
           <i className="fas fa-chevron-left"></i>
-          <small><Link to="/beverages">  Regresar</Link></small>
+          <small><Link to="/dishes">  Regresar</Link></small>
         </button>
         {this.form()}
       </div>
