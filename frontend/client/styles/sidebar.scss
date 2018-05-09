@@ -36,6 +36,7 @@
   background: #373a47;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+  text-decoration: none !important;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -50,6 +51,10 @@
   font-size: 1.5em;
   &.hover {
     font-size: 2em;
+  }
+  a{
+    color: white;
+    margin-bottom: 0.5rem;
   }
 }
 

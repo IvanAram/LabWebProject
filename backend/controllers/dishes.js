@@ -65,7 +65,7 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-  db.get().query('DELETE FROM MenuDishes WHERE d_id = ' + req.params.id, function(err, rows) {
+  db.get().query('DELETE FROM MenuDish WHERE d_id = ' + req.params.id, function(err, rows) {
     let response = {};
     if (err) {
       response.status = 4;
