@@ -168,6 +168,7 @@ exports.create = function(req, res) {
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
           response.status = 1;
+          console.log(err);
           response.message = "Created menu but email was not send";
         } else{
           response.status = 0;
