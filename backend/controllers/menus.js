@@ -131,33 +131,37 @@ exports.create = function(req, res) {
         response.message = err.sqlMessage || err;
         res.send(response);
       } else{
-        let transporter = nodemailer.createTransport("SMTP",{
-          service: 'Gmail',
-          auth: {
-            user: secret.user,
-            pass: secret.password
-          }
-        });
-        let mailOptions = {
-          from: 'noreply@exists.not',
-          to: req.session.email,
-          subject: 'You added a new menu!',
-          html: '<h1>Hello Admin!</h1>' +
-          '<p>You just added a menu to the menu list brah!</p>' +
-          '<p>That was amazing...</p>'
-        }
-        transporter.sendMail(mailOptions, (e, info) => {
-          if (e) {
-            response.status = 1;
-            console.log(e);
-            response.message = "Created menu but email was not send";
-          } else{
-            response.status = 0;
-            response.message = 'Success';
-            response.data = rows.insertId;
-          }
-          res.send(response);
-        });
+        response.status = 0;
+        response.message = 'Success';
+        response.data = rows.insertId;
+        res.send(response);
+        // let transporter = nodemailer.createTransport("SMTP",{
+        //   service: 'Gmail',
+        //   auth: {
+        //     user: secret.user,
+        //     pass: secret.password
+        //   }
+        // });
+        // let mailOptions = {
+        //   from: 'noreply@exists.not',
+        //   to: req.session.email,
+        //   subject: 'You added a new menu!',
+        //   html: '<h1>Hello Admin!</h1>' +
+        //   '<p>You just added a menu to the menu list brah!</p>' +
+        //   '<p>That was amazing...</p>'
+        // }
+        // transporter.sendMail(mailOptions, (e, info) => {
+        //   if (e) {
+        //     response.status = 1;
+        //     console.log(e);
+        //     response.message = "Created menu but email was not send";
+        //   } else{
+        //     response.status = 0;
+        //     response.message = 'Success';
+        //     response.data = rows.insertId;
+        //   }
+        //   res.send(response);
+        // });
       }
     });
   }
