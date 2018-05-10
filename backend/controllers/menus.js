@@ -146,14 +146,15 @@ exports.create = function(req, res) {
           '<p>You just added a menu to the menu list brah!</p>' +
           '<p>That was amazing...</p>'
         }
-        transporter.sendMail(mailOptions, (err, info) => {
-          if (err) {
+        transporter.sendMail(mailOptions, (e, info) => {
+          if (e) {
             response.status = 1;
-            console.log(err);
+            console.log(e);
             response.message = "Created menu but email was not send";
           } else{
             response.status = 0;
             response.message = 'Success';
+            response.data = rows.insertId;
           }
           res.send(response);
         });
