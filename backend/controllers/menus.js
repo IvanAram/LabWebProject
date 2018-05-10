@@ -131,8 +131,8 @@ exports.create = function(req, res) {
         response.message = err.sqlMessage || err;
         res.send(response);
       } else{
-        let transporter = nodemailer.createTransport({
-          service: 'gmail',
+        let transporter = nodemailer.createTransport("SMTP",{
+          service: 'Gmail',
           auth: {
             user: secret.user,
             pass: secret.password
