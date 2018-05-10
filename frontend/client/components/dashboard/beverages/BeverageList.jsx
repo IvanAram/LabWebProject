@@ -64,9 +64,9 @@ export default class BeverageList extends React.Component {
           <td>{i.description}</td>
           <td>{icon}</td>
           <td className="actions">
-            <Link to={{ pathname:`/beverages/${i.id}`, query:{beverage:i} }} className="btn btn-primary"><i className="fas fa-eye"></i> Detalles</Link>
-            <Link to={{ pathname:`/edit-beverage/${i.id}`, query:{beverage:i} }} className="btn btn-primary"><i className="far fa-edit"></i> Editar</Link>
-            <button type="button" className="btn btn-primary" onClick={this.deleteRecord.bind(this, i.id)}>
+            <Link to={{ pathname:`/beverages/${i.id}`, query:{beverage:i} }} className="btn btn-info"><i className="fas fa-eye"></i> Detalles</Link>
+            <Link to={{ pathname:`/edit-beverage/${i.id}`, query:{beverage:i} }} className="btn btn-warning"><i className="far fa-edit"></i> Editar</Link>
+            <button type="button" className="btn btn-danger" onClick={this.deleteRecord.bind(this, i.id)}>
               <i className="fas fa-trash"></i> Borrar
             </button>
           </td>
