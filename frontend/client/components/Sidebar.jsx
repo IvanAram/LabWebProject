@@ -11,7 +11,7 @@ export default class Sidebar extends React.Component {
           <Link key="2" to="/categories"><i className="fas fa-code-branch"></i><span> Categorias</span></Link>,
           <Link key="3" to="/waiters"><i className="fas fa-people-carry"></i><span> Meseros</span></Link>,
           <Link key="4" to="/tables"><i className="fas fa-th"></i><span> Mesas</span></Link>,
-          <a key="5" href=""><i className="fa fa-newspaper-o" /><span>Cerrar sesión</span></a>
+          <Link key="5" to="/menus"><i class="fas fa-utensils"></i><span> Menus</span></Link>
         ];
   }
 

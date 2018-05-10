@@ -30,6 +30,11 @@ import TableShow from './dashboard/tables/TableShow.jsx';
 import TableCreate from './dashboard/tables/TableCreate.jsx';
 import TableUpdate from './dashboard/tables/TableUpdate.jsx';
 
+import MenuList from './dashboard/menus/MenuList.jsx';
+import MenuShow from './dashboard/menus/MenuShow.jsx';
+import MenuCreate from './dashboard/menus/MenuCreate.jsx';
+import MenuUpdate from './dashboard/menus/MenuUpdate.jsx';
+
 const Routes = (props) => {
   return (
     <BrowserRouter>
@@ -63,6 +68,11 @@ const Routes = (props) => {
           <Route exact path="/new-table" component={TableCreate} />
           <Route exact path="/edit-table/:id" component={TableUpdate} />
           <Route path="/table/:id" component={TableShow} />
+
+          <Route exact path="/menus" component={MenuList} />
+          <Route exact path="/new-menu" component={MenuCreate} />
+          <Route exact path="/edit-menu/:id" component={MenuUpdate} />
+          <Route path="/menu/:id" component={MenuShow} />
         </div>
       </div>
     </BrowserRouter>
