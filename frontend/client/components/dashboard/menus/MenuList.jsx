@@ -25,7 +25,7 @@ export default class MenuList extends React.Component {
 
   deleteRecord(id, e) {
     e.preventDefault();
-    fetch(`http://localhost:3000/menu/${id}`, {
+    fetch(`http://localhost:3000/menus/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json, text/plain, */*',

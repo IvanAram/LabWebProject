@@ -7,8 +7,16 @@ export default class Login extends React.Component {
     super(props);
     this.state = {
       username: null,
-      password: null
+      password: null,
+      showError: false,
+      msgError: ''
     };
+  }
+
+  showError(error) {
+    return(
+      <small className="form-error">{error}</small>
+    );
   }
 
   validateLogin(e) {
@@ -34,6 +42,10 @@ export default class Login extends React.Component {
     .then(res => res.json())
     .then(res => {
       if (res.status == 1) {
+        this.setState({
+          showError: true,
+          msgError: res.data
+        });
         throw 'User not found';
       } else {
         localStorage.setItem('session', true);
@@ -41,6 +53,7 @@ export default class Login extends React.Component {
           username: username,
           password: password
         });
+        console.log(res);
         this.props.history.push("/dashboard");
       }
     })
@@ -62,6 +75,7 @@ export default class Login extends React.Component {
                 <div className="form-group">
                   <label>Contraseña:</label>
                   <input type="password" className="form-control" id="pwd"/>
+                  {this.state.showError ? this.showError(this.state.msgError) : ''}
                 </div>
                 <button type="button" className="btn btn-primary center-block" onClick={this.validateLogin.bind(this)}>
                   Submit

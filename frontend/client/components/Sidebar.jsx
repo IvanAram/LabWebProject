@@ -18,10 +18,10 @@ export default class Sidebar extends React.Component {
 
   closeSession(){
     localStorage.setItem('session', false);
-    debugger;
     this.setState({
       session: false
     });
+    this.props.history.push("/");
   }
 
 

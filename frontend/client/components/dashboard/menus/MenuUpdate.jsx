@@ -29,7 +29,6 @@ export default class MenuUpdate extends React.Component {
       .then(res => res.json())
       .then(res => {
         if(res.status == 0) {
-          //debugger;
           let ds = res.data.filter(d => dis.indexOf(d) );
           this.setState({
             newDishes: ds,
@@ -46,7 +45,6 @@ export default class MenuUpdate extends React.Component {
         .then(res => res.json())
         .then(res => {
           if(res.status == 0) {
-            //debugger;
             let ds = res.data.filter(d => dis.indexOf(d) );
             this.setState({
               newBeverages: ds,
@@ -130,6 +128,7 @@ export default class MenuUpdate extends React.Component {
     let items = [],
         bevs = this.state.beverages;
     var that = this;
+    // this existe aqui
     fetch('http://localhost:3000/menus/deleteBeverage', {
       method: 'DELETE',
       headers: {
@@ -139,17 +138,21 @@ export default class MenuUpdate extends React.Component {
       body: JSON.stringify(params)
     }).then(res => res.json())
       .then(res => {
+        // aqui no
         if (res.status == 1) {
           throw 'Error happend will requesting';
         } else {
           console.log(res);
-          items = bevs.filter(item => item.id !== beverageId);
+          console.log(that);
+          items = that.state.beverages.filter(item => item.id !== beverageId);
           this.setState({
             beverages: items
           });
         }
       })
       .catch(error => console.log(error));
+      // this existe aqui tambien
+
   }
 
   renderBeverage(){
@@ -241,7 +244,6 @@ export default class MenuUpdate extends React.Component {
 
   removeDish(menuId, dishId, e){
     e.preventDefault();
-    debugger;
     let params = {
       m_id: menuId,
       d_id: dishId

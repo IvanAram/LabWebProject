@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 export default class BeverageUpdate extends React.Component {
   constructor(props) {
     super(props);
-    debugger;
     if(this.props.location.query.beverage){
       this.state = {
         name_error: "Introducir un nombre",

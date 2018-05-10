@@ -197,7 +197,6 @@ export default class MenuCreate extends React.Component {
         </tr>
       );
     });
-    debugger;
     return(
       <div>
         <h3>Platillos</h3>
@@ -289,6 +288,7 @@ export default class MenuCreate extends React.Component {
     return(
       <div>
         {this.renderBeverages()}
+        {this.addBeverage()}
         {this.renderDishes()}
         {this.addDish()}
       </div>
