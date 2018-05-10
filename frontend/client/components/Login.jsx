@@ -51,7 +51,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center">Login!</h1>
         <div className="row">
           <div className="col-sm-12">
             <div className="center-block">
@@ -71,8 +70,6 @@ export default class Login extends React.Component {
             </div>
           </div>
         </div>
-
-        <Link to="/dashboard">Ir a dashboard</Link>
       </div>
     );
   }

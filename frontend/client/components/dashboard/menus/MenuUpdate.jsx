@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 
-export default class BeverageUpdate extends React.Component {
+export default class MenuUpdate extends React.Component {
   constructor(props) {
     super(props);
     debugger;
