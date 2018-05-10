@@ -35,47 +35,55 @@ import MenuShow from './dashboard/menus/MenuShow.jsx';
 import MenuCreate from './dashboard/menus/MenuCreate.jsx';
 import MenuUpdate from './dashboard/menus/MenuUpdate.jsx';
 
-const Routes = (props) => {
-  return (
-    <BrowserRouter>
-      <div>
-        <Sidebar />
-        <div className="bm-container">
-          <Route exact path="/" component={Login} />
-          <Route path="/dashboard" component={Index} />
+export default class Routes extends React.Component {
 
-          <Route exact path="/beverages" component={BeverageList} />
-          <Route exact path="/new-beverage" component={BeverageCreate} />
-          <Route exact path="/edit-beverage/:id" component={BeverageUpdate} />
-          <Route path="/beverages/:id" component={BeverageShow} />
+  userAuth() {
+    let session = localStorage.getItem('session');
+    if (session) return true;
+    return false;
+  }
 
-          <Route exact path="/dishes" component={DishList} />
-          <Route exact path="/new-dish" component={DishCreate} />
-          <Route exact path="/edit-dish/:id" component={DishUpdate} />
-          <Route path="/dish/:id" component={DishShow} />
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Sidebar />
+          <div className="bm-container">
+            <Route exact path="/" component={Login} />
+            <Route path="/dashboard" component={Index} />
 
-          <Route exact path="/categories" component={CategoryList} />
-          <Route exact path="/new-category" component={CategoryCreate} />
-          <Route exact path="/edit-category/:id" component={CategoryUpdate} />
-          <Route path="/category/:id" component={CategoryShow} />
+            <Route exact path="/beverages" component={BeverageList} />
+            <Route exact path="/new-beverage" component={BeverageCreate} />
+            <Route exact path="/edit-beverage/:id" component={BeverageUpdate} />
+            <Route path="/beverages/:id" component={BeverageShow} />
 
-          <Route exact path="/waiters" component={WaiterList} />
-          <Route exact path="/new-waiter" component={WaiterCreate} />
-          <Route exact path="/edit-waiter/:id" component={WaiterUpdate} />
-          <Route path="/waiter/:id" component={WaiterShow} />
+            <Route exact path="/dishes" component={DishList} />
+            <Route exact path="/new-dish" component={DishCreate} />
+            <Route exact path="/edit-dish/:id" component={DishUpdate} />
+            <Route path="/dish/:id" component={DishShow} />
 
-          <Route exact path="/tables" component={TableList} />
-          <Route exact path="/new-table" component={TableCreate} />
-          <Route exact path="/edit-table/:id" component={TableUpdate} />
-          <Route path="/table/:id" component={TableShow} />
+            <Route exact path="/categories" component={CategoryList} />
+            <Route exact path="/new-category" component={CategoryCreate} />
+            <Route exact path="/edit-category/:id" component={CategoryUpdate} />
+            <Route path="/category/:id" component={CategoryShow} />
 
-          <Route exact path="/menus" component={MenuList} />
-          <Route exact path="/new-menu" component={MenuCreate} />
-          <Route exact path="/edit-menu/:id" component={MenuUpdate} />
-          <Route path="/menu/:id" component={MenuShow} />
+            <Route exact path="/waiters" component={WaiterList} />
+            <Route exact path="/new-waiter" component={WaiterCreate} />
+            <Route exact path="/edit-waiter/:id" component={WaiterUpdate} />
+            <Route path="/waiter/:id" component={WaiterShow} />
+
+            <Route exact path="/tables" component={TableList} />
+            <Route exact path="/new-table" component={TableCreate} />
+            <Route exact path="/edit-table/:id" component={TableUpdate} />
+            <Route path="/table/:id" component={TableShow} />
+
+            <Route exact path="/menus" component={MenuList} />
+            <Route exact path="/new-menu" component={MenuCreate} />
+            <Route exact path="/edit-menu/:id" component={MenuUpdate} />
+            <Route path="/menu/:id" component={MenuShow} />
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
-};
-export default Routes;
+      </BrowserRouter>
+    );
+  }
+}
