@@ -4,6 +4,7 @@ import { Switch, Route, Router, BrowserRouter } from 'react-router-dom'
 import Sidebar from './Sidebar.jsx';
 import Login from './Login.jsx';
 import Index from './dashboard/Index.jsx';
+import { AnimatedSwitch } from 'react-router-transition';
 
 import BeverageList from './dashboard/beverages/BeverageList.jsx';
 import BeverageShow from './dashboard/beverages/BeverageShow.jsx';

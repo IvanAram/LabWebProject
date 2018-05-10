@@ -70,6 +70,7 @@ exports.getById = function(req, res) {
       if (err) {
         response.status = 4;
         response.message = err.sqlMessage || err;
+        res.send(response);
       } else {
         response.data = new Menu(rows[0].m_id, rows[0].label, rows[0].description);
         db.get().query('SELECT d.d_id, d.name, d.description, d.c_id FROM MenuDish md, Dishes d WHERE md.m_id=' + response.data.id + ' AND d.d_id = md.d_id', function(err, rows) {
@@ -101,7 +102,7 @@ exports.getById = function(req, res) {
         response.status = 0;
         response.message = 'Success';
       }
-      res.send(response);
+
     });
   }
 }
@@ -135,33 +136,6 @@ exports.create = function(req, res) {
         response.message = 'Success';
         response.data = rows.insertId;
         res.send(response);
-        // let transporter = nodemailer.createTransport("SMTP",{
-        //   service: 'Gmail',
-        //   auth: {
-        //     user: secret.user,
-        //     pass: secret.password
-        //   }
-        // });
-        // let mailOptions = {
-        //   from: 'noreply@exists.not',
-        //   to: req.session.email,
-        //   subject: 'You added a new menu!',
-        //   html: '<h1>Hello Admin!</h1>' +
-        //   '<p>You just added a menu to the menu list brah!</p>' +
-        //   '<p>That was amazing...</p>'
-        // }
-        // transporter.sendMail(mailOptions, (e, info) => {
-        //   if (e) {
-        //     response.status = 1;
-        //     console.log(e);
-        //     response.message = "Created menu but email was not send";
-        //   } else{
-        //     response.status = 0;
-        //     response.message = 'Success';
-        //     response.data = rows.insertId;
-        //   }
-        //   res.send(response);
-        // });
       }
     });
   }

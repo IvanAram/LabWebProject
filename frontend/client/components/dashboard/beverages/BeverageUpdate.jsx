@@ -9,7 +9,7 @@ export default class BeverageUpdate extends React.Component {
       this.state = {
         name_error: "Introducir un nombre",
         show_name: false,
-        desc_error: "Introudcir una descripcion del proyecto",
+        desc_error: "Introudcir una descripcion del bebidas",
         show_desc: false,
         beverage: this.props.location.query.beverage
       };

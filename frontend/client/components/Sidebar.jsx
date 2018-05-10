@@ -1,7 +1,6 @@
 import React from 'react';
 import BurgerMenu from 'react-burger-menu';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 export default class Sidebar extends React.Component {
   constructor(props){
@@ -14,6 +13,11 @@ export default class Sidebar extends React.Component {
   componentWillMount(){
     let session = localStorage.getItem('session');
     if (session) this.setState({session: session});
+  }
+
+  componentDidMount(){
+    if(!this.state.session)
+      window.history.pushState({}, '', 'http://localhost:8080/');
   }
 
   closeSession(){

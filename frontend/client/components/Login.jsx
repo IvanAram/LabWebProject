@@ -44,7 +44,7 @@ export default class Login extends React.Component {
       if (res.status == 1) {
         this.setState({
           showError: true,
-          msgError: res.data
+          msgError: res.message
         });
         throw 'User not found';
       } else {
@@ -75,8 +75,8 @@ export default class Login extends React.Component {
                 <div className="form-group">
                   <label>Contraseña:</label>
                   <input type="password" className="form-control" id="pwd"/>
-                  {this.state.showError ? this.showError(this.state.msgError) : ''}
                 </div>
+                {this.state.showError ? this.showError(this.state.msgError) : ''}<br/>
                 <button type="button" className="btn btn-primary center-block" onClick={this.validateLogin.bind(this)}>
                   Submit
                 </button>

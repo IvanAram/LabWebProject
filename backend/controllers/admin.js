@@ -2,7 +2,6 @@ let db = require('../db.js');
 
 exports.login = function(req, res) {
   let query;
-  console.log(req.session);
   if(req.body.username.indexOf("@") > 0){
     query = "SELECT * FROM Login WHERE email='" + req.body.username + "' AND password='" + req.body.password + "'";
   } else{
